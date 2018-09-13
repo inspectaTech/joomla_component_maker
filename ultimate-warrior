@@ -1,0 +1,58 @@
+#!/bin/bash
+#Joomla ultimate-warrior template
+#first bash/shell scripting url
+#http://linuxcommand.org/lc3_wss0010.php
+
+#run this to give the shell permissions
+#chmod 755 ultimate-warrior
+
+  #ask whether we are doing template, zip or both
+  #source works like using import or require in js
+  source src/r_u_sure.sh
+  source src/get_path.sh
+  source src/get_mode.sh
+  source src/template_type.sh
+  source src/create_directory.sh
+  source src/create_template.sh
+  source src/template_title.sh
+  source src/create_package.sh
+  source src/create_component.sh
+  source src/get_module_parent.sh
+  source src/create_module.sh
+  source src/zip_files.sh
+
+
+  mode_letter=""
+  template_letter=""
+  work_mode=""
+  template_type=""
+  template_url="pkg_psmod_v1.1.0"
+
+  #/********** COMPONENT VARIABLES **********/
+  component_name=""
+  cn=""
+  cn_caps=""
+  cn_init=""
+  cn_full=""
+  cn_full_caps=""
+  my_year=""
+  my_month_year=""
+
+  #/********** MODULE VARIABLES *************/
+  module_name=""
+  module_name=""
+  mn_caps=""
+  mn_init=""
+  mn_full=""
+  mn_full_caps=""
+  my_year=""
+  my_month_year=""
+  official_title_mod=""
+  module_parent=""
+
+
+  #/********** execution section ************/
+   getMode
+   printf "\n selected option is  $work_mode \n\n"
+   create_template
+   zip_files
