@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.0" type="plugin" group="system" method="upgrade">
+	<name>test plugin</name>
+	<author>none</author>
+	<creationDate>09-2018</creationDate>
+	<copyright>(c) 2018 company-name llc. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>none</authorEmail>
+	<authorUrl>none</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_PSMOD_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="psmod">psmod.php</filename>
+		<filename>index.html</filename>
+		<folder>language</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_system_psmod.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_system_psmod.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="header"
+					type="text"
+					label="PLG_PSMOD_LABEL"
+					description="PLG_PSMOD_DESCRIPTION"
+					default=""
+					size="37"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

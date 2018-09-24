@@ -1,0 +1,27 @@
+<div class="order_position_cont" ng-init="order.prep_assets(orderMode)">
+  <label class="order_label"><strong>scene:</strong> {{modPos}}</label>
+  <!-- <div class="order_btn w3-btn" ng-click="order.service.mod_overlay = '1'">
+    <i class="material-icons" style="font-size:1rem;color:#16438a">settings</i>
+  </div> -->
+</div>
+<hr class="order_hr"/>
+<div class="order_list {{order.mode}}_dropzone" >
+
+    <div id="{{order.mode}}_mov{{$index}}" ng-repeat="asset in order.service.asset_ids"
+    class="mov {{order.mode}}_mov {{order.mode}}_dropzone mov{{$index}}" data-my_id="{{asset}}"
+    draggable="true"  data-asset_data="{{order.service.asset_reference[asset]}}">
+     {{order.getTitle(order.service.asset_reference[asset].params)}}</div>
+
+</div>
+<hr class="order_hr order_hr2"/>
+<div class="order_confirm_cont">
+  <div class="order_update order_action w3-btn" ng-click="order.save_assets()">
+    <i class="material-icons" style="font-size:1rem;color:#16438a">save</i>
+  </div>
+  <div class="order_reset order_action w3-btn " ng-click="order.refresh()">
+    <i class="material-icons" style="font-size:1rem;color:#16438a">refresh</i>
+  </div>
+</div>
+<div class="order_log" style="display:none"></div>
+
+<!-- this template is not in use right now -->

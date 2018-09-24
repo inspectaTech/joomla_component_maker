@@ -1,0 +1,40 @@
+<div id="tool_space{{tool.id}}"  class="tool_space awake w3-col m4" ng-repeat="tool in work.toolData">
+  <span class="ng-hide" ng-bind="work.me_seeks()"></span>
+  <div class="tool_box w3-card-2" ng-mouseenter="tool[tool.id] = 1" ng-mouseleave="tool[tool.id] = 0"><!-- ng-bind overrides expressions  ng-bind="work.fn()" -->
+    <Label class="check_container check_tool">
+      <input id="check_tool{{tool.id}}" ng-if="work.autoCheck(tool.id) == true" class=" w3-check" type="radio" name="tools"  ng-click="work.activate_template(tool)" CHECKED />
+      <input id="check_tool{{tool.id}}" ng-if="work.autoCheck(tool.id) != true" class="check_tool w3-check" type="radio" name="tools"  ng-click="work.activate_template(tool)" />
+      <span class="checkmark"></span>
+    </label>
+    <div class="tool_overlay" ng-class="{'show':tool[tool.id]}">
+      <div class="tool_ctrl_box">
+        <div class="tool_btn_cont w3-center">
+          <button class="tool_btn sample_btn{{tool.id}} s3 w3-circle w3-border w3-border-white w3-button" title="view sample"
+          ng-mouseenter="work.prep_sample(tool.id,'glance')" ng-mouseleave="work.prep_sample(tool.id,'clear')"
+          ng-click="work.prep_sample(tool.id,'click')">
+            <i class="material-icons" style="font-size:1rem;color:white">visibility</i>
+          </button>
+          <!--
+            <button class="tool_btn edit_btn{{tool.id}} s3 w3-circle w3-border w3-border-white w3-button"
+            ng-click="work.edit_scene(tool.id)" title="edit scene">
+              <i class="material-icons" style="font-size:1rem;color:white">settings</i>
+            </button>
+          -->
+          <button class="tool_btn add_btn{{tool.id}} s3 w3-circle w3-border w3-border-white w3-button"
+            ng-click="work.radioCheck(tool.id); work.activate_template(tool)" title="add tool" >
+            <i class="material-icons" style="font-size:1rem;color:white">done</i>
+          </button>
+        </div>
+        <div id="tool_txt_cont{{tool.id}}" class="tool_txt_cont">
+          <p title="{{tool.title}}">
+            {{tool.title}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="tool_img{{tool.id}}" class="tool_img" ng-bind="work.insertCanvas(tool)">
+    </div>
+  </div>
+</div>
+
+<!-- this template is not in use right now -->

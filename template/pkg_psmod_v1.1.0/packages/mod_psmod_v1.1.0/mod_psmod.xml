@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="module"
+version="3.0"
+method="upgrade"
+client="site">
+    <name>Picture Show module</name><!-- Latest Extensions -->
+    <creationDate>08-2017</creationDate>
+    <author>inspectaTech</author>
+    <authorEmail>inspectaTech@sunzao.us</authorEmail>
+    <authorUrl>https://sunzao.us</authorUrl>
+    <copyright> (c) 2017 sunzao tech llc. all rights reserved.</copyright>
+    <license></license>
+    <version>1.1.0</version>
+    <description>Displays the most recently installed extensions.</description>
+    <files>
+        <filename module="mod_psmod">mod_psmod.php</filename><!-- module="mod_latestextensions">mod_latestextensions.php -->
+        <filename>helper.php</filename>
+        <filename>index.html</filename>
+        <folder>tmpl</folder>
+		<folder>xfiles</folder>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/en-GB.mod_psmod.ini</language><!-- en-GB.mod_latestextensions.ini -->
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="count" type="text" default="5" label="MOD_PSMOD_FIELD_COUNT_LABEL"
+                description="MOD_PSMOD_FIELD_COUNT_DESC" />
+            </fieldset><!-- label="MOD_LATESTEXTENSIONS_FIELD_COUNT_LABEL"
+                description="MOD_LATESTEXTENSIONS_FIELD_COUNT_DESC" -->
+
+            <fieldset name="advanced">
+                <field name="moduleclass_sfx" type="text"
+                label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL"
+                description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

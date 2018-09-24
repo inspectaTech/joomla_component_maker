@@ -1,0 +1,44 @@
+*{box-sizing:border-box;}
+
+  /** admin psmod side **/
+
+  .menus_title{width:20% !important;}
+
+  @media only screen and (min-width:320px) and (max-width:479px){
+
+  }
+
+
+
+
+  @media only screen and (min-width:480px) and (max-width:767px){
+
+  }
+
+
+
+
+  @media only screen and (min-width:768px) and (max-width:991px)
+  {
+
+  }
+
+
+
+
+  @media only screen and (min-width:992px) and (max-width:1999px)
+  {
+
+  }
+
+
+  .jqm_icon_delete{background: url("../images/jqm_delete.png");}
+  .jqm_icon_action{background: url("../images/jqm_action.png");}
+
+
+  .test_yellow{border:1px solid yellow !important;}
+  .test_red{border:1px solid red !important;}
+  .test_blue{border:1px solid blue !important;}
+  .test_green{border:1px solid green !important;}
+  .test_purple{border:1px solid purple !important;}
+  .test_orange{border:1px solid orange !important;}

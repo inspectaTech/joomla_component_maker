@@ -1,0 +1,66 @@
+* {
+  box-sizing: border-box; }
+
+/** admin side **/
+/*responsive menu and media breakpoints*/
+/*@media (min-width:800px) and (max-width:900px){
+.controls.btn_Cont {margin-left:380px !important;}
+}*/
+/*works*/
+/*@media only screen and (min-width:800px) and (max-width:900px){
+.controls.btn_Cont {margin-left:380px !important;}
+}*/
+/*works*/
+#jform_position, #jform_suffix {
+  height: 29px; }
+
+*[class*="_MBCont"] {
+  height: auto;
+  margin: auto;
+  width: 95%; }
+
+/*border:1px solid yellow;*/
+/*box-sizing:border-box;*/
+*[class*="_icon_menu"] {
+  height: 120px;
+  border: 1px solid #ccc;
+  border-radius: 10px 0 0 0;
+  padding: 3px;
+  overflow-y: auto;
+  width: 70%;
+  float: left; }
+
+/*group sample*/
+.col_btn_group0:hover, .col_btn_group0:focus, .col_btn_group0:active, .col_btn_group0.active,
+.col_btn_group0.disabled, .col_btn_group0[disabled] {
+  background-image: none !important; }
+
+/*background-color:#828282 !important;*/
+/****************** special IUN assignemnts ************************/
+/*image sample*/
+.jqm_icon_delete {
+  background: url("../images/jqm_delete.png"); }
+
+.jqm_icon_action {
+  background: url("../images/jqm_action.png"); }
+
+/* for temporary test classes */
+.test_yellow {
+  border: 1px solid yellow !important; }
+
+.test_red {
+  border: 1px solid red !important; }
+
+.test_blue {
+  border: 1px solid blue !important; }
+
+.test_green {
+  border: 1px solid green !important; }
+
+.test_purple {
+  border: 1px solid purple !important; }
+
+.test_orange {
+  border: 1px solid orange !important; }
+
+/*# sourceMappingURL=psmod.css.map */

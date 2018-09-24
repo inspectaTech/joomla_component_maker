@@ -1,0 +1,185 @@
+<div class="color_module">
+  <div class="color_intro_btn w3-card w3-btn" ng-show="picasso.init_state == 'start'"
+  ng-click="picasso.init_state = 'window';picasso.getDestinationColor();">color themes</div>
+  <div class="adv_col_window" ng-show="picasso.init_state == 'window'">
+    <div class="adv_col_window_ctrls">
+      <div class="acwc_btn" >
+        <div class="current_swatch" style="background-color:{{picasso.current_color}};"
+        ng-click="picasso.update_input_color(picasso.current_color)"></div>
+      </div>
+      <button type="button" class="w3-button acwc_btn" ng-click="picasso.window_section = 'current'"
+      title="view current pallets"  ng-mouseenter="picasso.expand_wrapper = 'none'" >
+        <i class="material-icons" style="font-size:1rem;color:#17315a">visibility</i><!--subject-->
+      </button>
+      <button type="button" class="w3-button acwc_btn" ng-click="picasso.window_section = 'all'"
+      title=""  ng-mouseenter="picasso.expand_wrapper = 'none'" >
+        <i class="material-icons" style="font-size:1rem;color:#17315a">star</i><!--subject-->
+      </button>
+      <button type="button" class="w3-button acwc_btn" ng-click="picasso.window_section = 'personal'"
+       title=""  ng-mouseenter="picasso.expand_wrapper = 'none'" >
+        <i class="material-icons" style="font-size:1rem;color:#17315a">person</i><!--subject-->
+      </button>
+      <button type="button" class="w3-button acwc_btn" ng-click="picasso.window_section = 'reference'"
+      title="online references"  ng-mouseenter="picasso.expand_wrapper = 'none'" >
+        <i class="material-icons" style="font-size:1rem;color:#17315a">import_contacts</i><!--subject-->
+      </button>
+      <button type="button" class="w3-button acwc_btn"  ng-mouseenter="picasso.expand_wrapper = 'none'"
+      ng-click="picasso.window_section = 'edit';picasso.create_new_pallet()"  title="create new pallet" >
+        <i class="material-icons" style="font-size:1rem;color:#17315a">add_box</i><!--subject-->
+      </button>
+      <button type="button" class="w3-button acwc_btn"  ng-mouseenter="picasso.expand_wrapper = 'none'"
+      ng-click="picasso.init_state = 'start';picasso.reset_editor()"  title="close color themes" >
+        <i class="material-icons" style="font-size:1rem;color:#17315a">close</i><!--subject-->
+      </button>
+    </div>
+    <hr>
+    <div class="adv_col_window_content">
+      <div class="col_win_sect col_win_cur current" ng-show="picasso.window_section == 'current'">
+        <h5>current colors</h5>
+        <div class="inner">
+          <div class="cur_swatch_cont w3-btn" ng-repeat="curCol in picasso.module_colors">
+            <div class="mod_swatch" style="background-color:{{curCol}};"
+            ng-click="picasso.update_input_color(curCol)"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- *****************************   DATA SECTION  ***************************** -->
+
+      <div class="col_win_sect col_win_data data" ng-show="picasso.window_section == 'personal' || picasso.window_section == 'all'">
+        <div class="color_data_wrapper" ng-repeat="data in picasso.colorData"
+        ng-show="picasso.open_wrapper ==  $index || picasso.open_wrapper ==  'none'" >
+          <div class="cD_pallet_header" style="background-color:{{data.data[0].swatches[0]}};"
+          ng-click="picasso.toggle_wrapper($index)">
+            <h5 class="cD_pallet_title" style="{{picasso.service.lt_or_dk(data.data[0].swatches[0])}}">
+              {{data.title}}
+            </h5>
+            <button class="cD_pallet_edit_btn w3-btn" ng-click="" ></button>
+          </div>
+          <div class="cD_pallet_contents" ng-show="picasso.open_wrapper ==  $index">
+            <div class="cD_pallet_lvl" ng-repeat="level in data.data">
+              <h5 class="cD_pallet_lvl_title" >
+                level {{$index + 1}}
+              </h5>
+              <div class="level_swatch_cont">
+                <div class="data_swatch_cont w3-btn" ng-repeat="swatch in level.swatches">
+                  <div class="data_swatch" style="background-color:{{swatch}};"
+                  ng-click="picasso.update_input_color(swatch)"></div>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- *****************************  END  DATA SECTION  ***************************** -->
+
+      <!-- *****************************   REFERENCE SECTION  ***************************** -->
+
+      <div class="col_win_sect col_win_ref reference" ng-show="picasso.window_section == 'reference'">
+        <h5>tools/references</h5>
+        <div class="inner_col">
+          <div class="color_item webRef w3-button" ng-repeat="webRef in picasso.colorJSON.reference"
+          style="{{picasso.setFavData(webRef.id)}}">
+              <div class="color_item_icon">
+                <i class="material-icons" style="font-size:1rem;color:#17315a">{{webRef.icon}}</i>
+              </div>
+              <a class="color_item_link button" href="{{webRef.url}}" target="_blank"
+              rel="noopener noreferrer" >{{webRef.title}}</a>
+              <div class="color_item_like" >
+                <i class="material-icons" style="font-size:1.2rem;color:{{picasso.fav_icon_color}};">{{picasso.fav_icon}}</i><!--favorite_border-->
+              </div>
+          </div>
+        </div><!-- inner -->
+      </div><!-- end reference section -->
+
+      <!-- *****************************   END REFERENCE SECTION  ***************************** -->
+
+      <!-- *****************************   EDIT SECTION  ***************************** -->
+
+      <div class="col_win_sect col_win_edit edit" ng-show="picasso.window_section == 'edit'">
+        <div class="col_win_edit_auto" ng-show="picasso.auto_editor == true" >
+          <div class="col_win_edit_auto_title">
+            <h5>pallet maker</h5>
+            <button class="col_win_edit_auto_title_btn w3-btn" ng-click="picasso.auto_editor = false" >
+              <i class="material-icons" style="font-size:1.2rem;">close</i><!--favorite_border-->
+            </button>
+          </div>
+          <div class="col_win_edit_auto_content">
+              <div class="cwea_swatch" style="background-color:{{picasso.temp_color}};"></div>
+              <input class="col_win_edit_auto_title_input" type="text" name="" 
+              placeholder="enter a hex value" ng-blur="picasso.check_auto()" ng-model="picasso.auto_input_text">
+              <button class="cweac_btn w3-btn" >
+                <i class="material-icons" style="font-size:1.2rem;color:green;">done</i><!--favorite_border-->
+              </button>
+          </div>
+        </div>
+        <div class="col_win_editor edit" ng-show="picasso.auto_editor != true" >
+          <div class="col_win_edit_title">
+            <h5>add new pallet</h5>
+            <button class="col_win_edit_title_btn w3-btn" ng-click="picasso.start_auto_mode()" >auto</button>
+          </div>
+          <hr>
+          <div ng-show="picasso.loader == 1" class="curtain col_win_edit_curtain" ng-dblclick="picasso.loader = 0">
+            <div class="loader"></div>
+          </div>
+          <div class="col_edit_head_cont">
+            <div class="col_edit_title_input_cont">
+              <input class="col_edit_title_input" ng-class="{invalid:picasso.valid_title == 'invalid'}" type="text" name=""
+              placeholder="pallet title..." ng-blur="picasso.check_title()" ng-model="picasso.editor_pallet.title">
+            </div>
+            <button type="button" class="w3-button col_edit_title_btn confirm" ng-click="picasso.save_pallet()" >
+              <i class="material-icons" style="font-size:1rem;color:green">save</i><!--subject-->
+            </button>
+            <button type="button" class="w3-button col_edit_title_btn cancel" ng-click="picasso.window_section = 'current';picasso.reset_editor();" >
+              <i class="material-icons" style="font-size:1rem;color:#17315a">close</i><!--subject-->
+            </button>
+          </div>
+          <span class="col_edit_info w3-pale-red" ng-show="picasso.valid_title == 'invalid'" >a title is required</span>
+          <div class="col_edit_data_cont">
+            <div class="col_edit_level {{level.title}}"  ng-repeat="level in picasso.editor_pallet.data">
+              <hr>
+              <div class="col_edit_content">
+                <div class="swatch_watch" >
+                  <div class="swatch" ng-repeat="color in level.swatches"
+                  style="background-color:{{color}};" ng-click="picasso.removeSwatch(level.title,color)"></div>
+                  <button type="button" class="w3-button col_edit_color_btn dropdown" ng-click="picasso.swatch_menu(level.title)" >
+                    <i class="material-icons" style="font-size:1.2rem;color:#504f4f;" >add_box</i><!--subject-->
+                  </button>
+                </div>
+                <div class="col_lvl_close_cont"><!-- ng-if="$index != 0"  -->
+                  <button type="button" ng-if="picasso.editor_pallet.data.length > 1" class="w3-button col_edit_color_btn remove_lvl"
+                    ng-click="picasso.level_up(level.title,'remove');picasso.swatch_menu();" >
+                    <i class="material-icons" style="font-size:1rem;color:#17315a;">close</i><!--subject-->
+                  </button>
+                </div>
+              </div>
+              <div class="col_edit_dropper {{level.title}}" ng-show="picasso.show_dropdown == '{{level.title}}'">
+                <div class="col_edit_color_input_cont">
+                  <input class="col_edit_color_input {{level.title}}" type="text" name="" value=""
+                  placeholder="css hex color" ng-enter="picasso.add_swatches(level.title)">
+                </div>
+                <button type="button" class="w3-button col_edit_color_btn confirm" ng-click="picasso.add_swatches(level.title)" >
+                  <i class="material-icons" style="font-size:1rem;color:green;">done</i><!--subject-->
+                </button>
+                <button type="button" class="w3-button col_edit_color_btn cancel" ng-click="picasso.swatch_menu()" >
+                  <i class="material-icons" style="font-size:1rem;color:#17315a;">close</i><!--subject-->
+                </button>
+              </div>
+            </div><!--lvl end-->
+            <div class="col_edit_new_lvl" ng-show="picasso.show_dropdown == 'none'">
+              <hr>
+              <button type="button" class="w3-button col_edit_new_lvl_btn" ng-click="picasso.level_up()" >
+                new color level<i class="material-icons" style="font-size:1.2rem;color:#504f4f;" >add_circle</i><!--subject-->
+              </button>
+            </div>
+          </div><!-- col_edit_data_cont -->
+        </div>
+      </div><!-- col_win_edit -->
+
+      <!-- ***************************** END EDIT SECTION  ***************************** -->
+
+    </div>
+  </div>
+</div>

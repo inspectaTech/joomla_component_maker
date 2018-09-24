@@ -1,0 +1,121 @@
+#!/bin/bash
+echo "test code running"
+source ./src/print_ef.sh
+# find template/ -maxdepth 1 -type d -name "pkg_*" | while read -r -d '' file;
+# while read -r file;
+# do
+#   pkg_path="$file"
+#   echo "echo path is $pkg_path"
+# done <<< $(find template -maxdepth 1  -type d -name "pkg_*")
+#
+# pkg_path="$pkg_path/packages"
+# # echo "new package path = $pkg_path"
+#
+# while read -r file;
+# do
+#   com_path=$file
+#   printf "\ncom path = \n$com_path\n\n"
+# done <<< $(find $pkg_path -maxdepth 1 -type d -name "mod_*")
+
+# using the grep command
+# cut_string="me,myself,and,i \n you,and,i";
+# # substr=$( echo $cut_string | grep -o 'my[a-z]*' )
+# # # echo $cut_string | grep -o 'my[a-z]*'
+# # echo $substr
+# echo $cut_string | sed 's/\(my[A-Za-z]*\).*/\1/'
+# echo $cut_string | sed 's/my\([A-Za-z]*\).*/\1/'
+# echo $cut_string | sed 's/.*\(my[A-Za-z]*\).*/\1/'
+#
+# echo "foobarbaz" | grep -o 'b[aeiou]r'
+
+# if [[ $cut_string =~ my[A-Za-z]* ]]
+# then
+# echo ${BASH_REMATCH[0]}
+# fi
+#
+# # original working version
+# if [[ "452MATCHME" =~ ^([0-9]+).* ]]
+# then
+#     echo ${BASH_REMATCH[1]};
+# fi
+
+# echo "abcd123" | sed 's/\([a-z]*\).*/\1/'
+# my_dir_name=$(pwd)
+# echo $my_dir_name
+# if [[ $(file --mime-type -b  "$my_dir_name") = *"/directory"* ]]
+# then
+#   echo "my dir is a directory"
+# fi
+
+# find the xml file    while read -r file;
+# do
+#   xml_file_path="$file"
+#   echo "xml path is $xml_file_path"
+# done <<< $(find template_url -maxdepth 1  -type d -name "*.xml")
+#
+#
+# find . -type f -maxdepth 1 |  while read file;
+# do
+# echo "$file";
+# sed -i -e 's/'"${current_name^}"'/'"${new_name^}"'/g' $file
+# done;
+
+
+# # find a file with the following txt
+# while read -r file;
+# do
+#
+#   sed -i "s/$pattern/$new_pattern/w changelog.txt" "$filename"
+#   if [ -s changelog.txt ]; then
+#     # CHANGES MADE, DO SOME STUFF HERE
+#     printf "$file\n\n"
+#   else
+#     # NO CHANGES MADE, DO SOME OTHER STUFF HERE
+#   fi
+#
+# done <<< $(find .  -type f )
+
+# file="$1"
+# if [[ -e "$file" ]] && [[ ! -d $file ]]
+# then
+#   pf "its a file"
+# else
+#   pf "its not a file"
+# fi
+
+# counter=0
+# n_range=${1:-0}
+# n_str=""
+# while [ $counter -lt $n_range ]
+# do
+# pf $counter
+# ((counter++))
+# # n_str="$n_str\n"
+# n_str="$n_str extra"
+# done
+#
+# for (( c=0; c<$n_range; c++ ))
+# do
+# pf "$c"
+# # n_str="$n_str\n"
+#  n_str="$n_str extra"
+# done
+#
+# pf "the final counter is $counter"
+# pf "n string = $n_str"
+
+# cr=`echo $'\n.'`
+# cr=${cr%.}
+#
+# # Use it
+# read -p "Please Enter a Message: $cr" message
+
+# source src/user_input.sh
+#
+# get_input "Enter the file number next to the file that you want to use." 5
+
+source src/get_main.sh
+
+get_main fin_var
+
+pf "$fin_var"

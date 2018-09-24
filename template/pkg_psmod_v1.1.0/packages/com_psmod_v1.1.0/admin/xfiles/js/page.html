@@ -1,0 +1,48 @@
+
+<div id="page_space{{page.id}}" class="page_space awake w3-col m4" ng-repeat="page in pAssets.PageData">
+  <div class="page_box w3-card-2" ng-mouseenter="page[page.id] = 1" ng-mouseleave="page[page.id] = 0" >
+    <span class="ng-hide" ng-bind="pAssets.testHome(page)"></span>
+    <input id="check_page{{page.id}}" class="check_page w3-check" type="checkbox" ng-click="pAssets.check_one(page.id)">
+    <button class="page_btn home_btn{{page.id}} home_btn s3 w3-border w3-border-grey w3-button"
+      ng-click="pAssets.set_home(page.id)" title="delete scene" >
+      <i ng-if="page.home == 1" class="material-icons" style="font-size:1.2rem;color:gold">star</i>
+      <i ng-if="page.home != 1" class="material-icons" style="font-size:1.2rem;color:grey">home</i>
+    </button>
+    <div id="page_txt_cont{{page.id}}" class="page_txt_cont1">
+      <p title="{{pAssets.object_params['params'+page.id].title}}">
+        {{page.title}}
+      </p>
+    </div>
+    <div class="page_overlay" ng-class="{'show':page[page.id]}">
+      <div class="page_ctrl_box">
+        <div class="page_btn_cont w3-center">
+          <button class="page_btn sample_btn{{page.id}} s3 w3-circle w3-border w3-border-white w3-button" title="view sample"
+          ng-mouseenter="pAssets.prep_sample(page.id,'glance')" ng-mouseleave="pAssets.prep_sample(page.id,'clear')"
+          ng-click="pAssets.prep_sample(page.id,'click')">
+
+            <i class="material-icons" style="font-size:1rem;color:white">visibility</i>
+          </button>
+          <button class="page_btn edit_btn{{page.id}} s3 w3-circle w3-border w3-border-white w3-button"
+          ng-click="pAssets.edit_scene(page.id)" title="edit scene">
+            <i class="material-icons" style="font-size:1rem;color:white">edit</i>
+          </button>
+          <button ng-if="page.component_id == pAssets.service.ext_id" class="page_btn delete_btn{{page.id}} s3 w3-circle w3-border w3-border-white w3-button"
+            ng-click="pAssets.prep_sample(page.id,'delete')" title="delete scene" >
+            <i class="material-icons" style="font-size:1rem;color:white">delete_forever</i>
+          </button>
+        </div>
+        <div id="page_txt_cont{{page.id}}" class="page_txt_cont2">
+          <p title="{{pAssets.object_params['params'+page.id].title}}">
+            {{page.title}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="page_img{{page.id}}" class="page_img" ng-bind="pAssets.insertCanvas(page,$last)">
+    </div>
+  </div>
+</div>
+<!--
+-->
+
+<!-- this template is not in use right now -->

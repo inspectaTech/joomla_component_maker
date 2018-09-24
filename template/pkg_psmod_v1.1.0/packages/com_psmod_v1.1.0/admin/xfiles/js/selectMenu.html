@@ -1,0 +1,7 @@
+<div class="tHead_sel">
+  <select class=" w3-select w3-border" ng-model="valData.getValue"
+  ng-model-options="{ getterSetter: true }" name="{{selData.label}}" >
+    <option  value="" disabled selected>{{selData.label}}</option>
+    <option ng-selected="{{$index == 0 ? 'selected' : ''}}" ng-repeat="(key,val) in selData.options" value="{{key}}">{{val}}</option>
+  </select>
+</div>

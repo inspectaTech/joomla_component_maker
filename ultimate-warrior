@@ -8,25 +8,32 @@
 
   #ask whether we are doing template, zip or both
   #source works like using import or require in js
-  source src/r_u_sure.sh
-  source src/get_path.sh
-  source src/get_mode.sh
-  source src/template_type.sh
-  source src/create_directory.sh
+  source src/print_ef.sh
+  source src/user_input.sh
   source src/create_template.sh
+  source src/get_path.sh
+  source src/get_main.sh
+  source src/create_directory.sh
+  source src/template_type.sh
+  source src/get_directory.sh
   source src/template_title.sh
-  source src/create_package.sh
-  source src/create_component.sh
-  source src/get_module_parent.sh
-  source src/create_module.sh
+  source src/get_mode.sh
+  source src/prep_output.sh
+  source src/replace_xml.sh
+  source src/target.sh
+  source src/update_names.sh
   source src/zip_files.sh
+  # source src/create_package.sh
+  source src/get_module_parent.sh
+  # source src/create_module.sh
 
 
   mode_letter=""
   template_letter=""
   work_mode=""
   template_type=""
-  template_url="pkg_psmod_v1.1.0"
+  template_location=""
+  template_url=""
 
   #/********** COMPONENT VARIABLES **********/
   component_name=""
@@ -52,7 +59,14 @@
 
 
   #/********** execution section ************/
-   getMode
+   getMode uw_mode
    printf "\n selected option is  $work_mode \n\n"
-   create_template
-   zip_files
+   case $uw_mode in
+    "template" | "both"  )
+      create_template
+     ;;
+     "zip" )
+      zip_files
+     ;;
+   esac
+   # i need to be able to jump directly to the zip

@@ -1,0 +1,25 @@
+<div class="order_position_cont" ng-init="order.mode = 'module'">
+  <label class="order_label"><strong>module:</strong> {{modPos}}</label>
+  <div class="order_btn w3-btn" ng-click="order.service.mod_overlay = '1'">
+    <i class="material-icons" style="font-size:1rem;color:#16438a" >my_location</i>
+  </div>
+</div>
+<hr class="order_hr"/>
+<div class="order_list module_dropzone" >
+
+    <div id="mov{{$index}}" ng-repeat="module in order.module_list" class="mov  {{order.mode}}_mov module_dropzone mov{{$index}}"
+     draggable="true" data-module_data="{{module}}">{{module.title}}</div>
+
+</div>
+<hr class="order_hr order_hr2"/>
+<div class="order_confirm_cont">
+  <div class="order_update order_action w3-btn" ng-click="order.reorderModules()">
+    <i class="material-icons" style="font-size:1rem;color:#16438a">edit_location</i>
+  </div>
+  <div class="order_reset order_action w3-btn " ng-click="order.getModuleOrder('reset')">
+    <i class="material-icons" style="font-size:1rem;color:#16438a">refresh</i>
+  </div>
+</div>
+<div class="order_log" style="display:none"></div>
+
+<!-- this template is not in use right now -->

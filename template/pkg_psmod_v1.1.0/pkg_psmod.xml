@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="package"
+version="3.0">
+    <name>Picture Show</name><!-- Latest Extensions -->
+    <creationDate>08-2017</creationDate>
+    <packagename>psmod</packagename>
+    <author>inspectaTech</author>
+    <authorEmail>inspectaTech@sunzao.us</authorEmail>
+    <authorUrl>https://sunzao.us</authorUrl>
+    <copyright> (c) 2017 sunzao tech llc. All rights reserved.</copyright>
+    <license></license>
+    <version>1.0.0</version>
+    <packager>inspectaTech</packager>
+    <packageUrl>https://sunzao.us</packageUrl>
+    <description>Single install package combining the component template and the module template</description>
+    <files folder="packages">
+    <file type="component" id="psmod">com_psmod_v1.1.0.zip</file>
+    <file type="module" id="psmod">mod_psmod_v1.1.0.zip</file>
+    </files>
+</extension>

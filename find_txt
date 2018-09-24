@@ -1,0 +1,135 @@
+#!/bin/bash
+
+printf "\nwhat is the text that you would like to find? \n"
+read -p "(for example: Test component) : " text_to_find
+
+if [ -z $text_to_find ]
+then
+  printf "\nsearch text is required \n\n"
+  printf "\nexiting script...\n\n"
+  exit 1;
+fi
+
+printf "\n Enter the file path where you would like to begin the search.\n\n"
+read -p "(Enter Filepath) : " file_path
+file_path=${file_path:-"."}
+
+if [[ $(file --mime-type -b  "$file_path") = *"/directory"* ]]
+  then
+    printf "\ndirectory detected \n\n"
+  else
+    printf "\nfile path must be a valid directory \n\n"
+    printf "\nexiting script...\n\n"
+    exit 1
+fi
+
+# printf "\n would you like to save the results to a file.\n\n"
+# read -p "(use 'y' for yes otherwise press enter) : " save_to_file
+
+printf "\n would you like to replace the text with new text?\n\n"
+read -p "(type the new text or press enter to skip and continue) : " text_to_replace
+
+text_to_replace=${text_to_replace:-$text_to_find}
+
+if [ -z "$text_to_find" ]
+then
+  ./find_txt
+else
+  # NO CHANGES MADE, DO SOME OTHER STUFF HERE
+  text_to_find="$text_to_find"
+
+  case $save_to_file in
+    "y" )
+    sed_output="w changelog.txt"
+    ;;
+    "*" )
+    sed_output="p"
+    ;;
+  esac
+
+  printf "\nshow live progress updates?\n\n"
+  read -p "(y or no) : " show_progress
+
+  show_progress="${show_progress:-'no'}"
+  # find a file with the following txt
+  while read -r file;
+  do
+
+  # the goal is to print to the console or to an output file
+  # sed -i "s/.*\($text_to_find\).*/\1/$sed_output" "$file";
+  # echo $file;
+  # sed -i -e 's/'"$text_to_find"'/spider_man/w changelog.txt' "$file";
+  # sed -n -e 's/'"$text_to_find"'/spider_man/p ' "$file";#this works - prints in cli\
+  # sed -i -e 's/'"$text_to_find"'/spider_man/p ' "$file";# doesn't print to console
+  # sed -n -e 's/'"$text_to_find"'/spider_man/w changelog.txt' "$file";# changelog still blank
+  # sed -n 's/'"$text_to_find"'/'"$text_to_find"'/w changelog.txt' "$file";
+  # sed -n -e 's/'"$text_to_find"'/'"$text_to_find"'/p ' "$file"
+  # change=$(sed -n -e 's/.*\('"$text_to_find"'\).*/$text_to_replace/gp ' "$file") # this works to set a variable with the output
+
+  #this prints the location of the text we want to replace to the terminal
+  change=$(sed -n -e 's/'"$text_to_find"'/$text_to_replace/gp ' "$file")
+  # sed -n -e 's/'"$text_to_find"'/'"$text_to_find"'/p ' "$file" | read change; # same result
+
+  # show process
+  if [ $show_progress == "yes" ] | [ $show_progress == "y" ]
+    then
+    printf "\nsearching file $file ... \n"
+  fi
+
+  if [ -n "$change" ]
+  then
+    # -n is for not empty string -z is for emtpy string
+    printf "\n\n target aquired: \n";
+    # printf "\n $change \n";
+    printf "$file \n\n";
+  fi
+
+  # if [ -s changelog.txt ]
+  # then
+  # # CHANGES MADE, DO SOME STUFF HERE
+  #   printf "$file\n\n"
+  # else
+  #   # NO CHANGES MADE, DO SOME OTHER STUFF HERE
+  # fi
+
+done <<< $(find "$file_path" -type f )
+
+fi
+
+printf "\nsearch complete \n\n"
+
+printf "\nwould you like to make changes to these files? \n"
+printf "\n$text_to_find to $text_to_replace\n\n"
+read -p "(enter y or n) : " make_changes
+
+make_changes="${make_changes:-'n'}"
+
+case $make_changes in
+  "y" | "yes" )
+  find "$file_path" -type f | while read -r file;
+  do
+    # rename the contents first
+    change=$(sed -n -e 's/'"$text_to_find"'/$text_to_replace/gp ' "$file")
+    # sed -n -e 's/'"$text_to_find"'/'"$text_to_find"'/p ' "$file" | read change; # same result
+
+    # show process
+    if [ $show_progress == "yes" ] | [ $show_progress == "y" ]
+      then
+      printf "\nsearching file $file ... \n"
+    fi
+
+    if [ -n "$change" ]
+    then
+      # -n is for not empty string -z is for emtpy string
+      printf "\n\n target aquired: \n";
+      # printf "\n $change \n";
+      printf "$file \n\n";
+      # if i finds something change it
+      sed -i -e 's/'"${text_to_find}"'/'"${text_to_replace}"'/g' $file;
+    fi
+
+  done
+
+  printf "\nchanges completed... \n\n"
+  ;;
+esac
