@@ -8,9 +8,23 @@ function r_u_sure () {
   deny="${3:-'n'}"
   def_val=${4:-"none"}
 
+  # setup the default indicators
+  if [ $def_val != "none" ] && [ $confirm = $def_val ]
+  then
+    a1="*"
+    a2=""
+  elif [ $def_val != "none" ] && [ $confirm != $def_val ]
+  then
+    a1=""
+    a2="*"
+  else
+    a1=""
+    a2=""
+  fi
+
   #pf "$sure_txt"
 
-  read -p "$sure_txt ($2,$3) : " sure_input
+  read -p "$sure_txt ( $2$a1 , $3$a2 ) : " sure_input
   #pf "sure input = $sure_input"
   if [ $def_val != "none" ]
   then
@@ -27,6 +41,26 @@ function r_u_sure () {
   esac
 
   #cat $sure_input
+}
+
+function pause () {
+
+  local cr=`echo $'\n.'`
+  cr=${cr%.}
+  pf "script paused..." 2 3
+  case $user_mode in
+    "dev" | "development")
+
+      read -p "press Enter to continue. Type 'e' or 'x' to exit: " do_exit
+
+      pf "" 0 2
+      case $do_exit in
+        "e" | "x" | "exit" )
+        exit 1
+        ;;
+      esac
+    ;;
+  esac
 }
 
 function get_input () {

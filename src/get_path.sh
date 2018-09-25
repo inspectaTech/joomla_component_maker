@@ -16,20 +16,22 @@ function get_path () {
   case $template_url in
     pkg_* | */pkg_* | com_*| */com_* | mod_*| */mod_ | plg_*| */plg_* )
       template_location="remote"
-      pf "custom template url = $template_url "
-      # if they pasted a path and its fits here copy the folder to the output folder
+      console.log "custom template url = $template_url "
+      # if they pasted a path and its fits here copy the folder to the $temp_dir folder
     ;;
     "default")
       template_location="default"
-      pf "using default template"
+      console.log "using default template"
       # uses get_directory get the path of the target directory
       templateType template_url
       pf "dynamic template url = $template_url "
     ;;
     "c" | "continue" )
+
+      console.log "continue section entered"
       template_location="present"
-      # checks the existence of the output folder
-      #if no output folder make it and send instructions
+      # checks the existence of the $temp_dir folder
+      #if no $temp_dir folder make it and send instructions
 
       #checks the existence of a file with pkg,com,mod or plg
 
@@ -57,9 +59,9 @@ function get_path () {
            \n\n
           hint 3:\n
            to continue in place paste the folder you would like to work with inside
-           of the output folder or if there isn't an output folder start the process by
-           choosing c for continue and the script will create an output folder for you
-           to paste your files into.
+           of the $temp_dir folder or if there isn't an $temp_dir folder start the process by
+           choosing c for continue and the script will create an $temp_dir folder for you
+           to paste your files into. -( or just create your own in the j.c.m root folder.)
            "
 
       exit 1
@@ -70,16 +72,17 @@ function get_path () {
     ;;
   esac
 
-      pf " directory = $template_url"
-      pf " directory type = $(file --mime-type -b  "$template_url")\n"
-      if [[ $(file --mime-type -b  "$template_url") = *"/directory"* ]]
-      then
-        pf "its a directory "
-        pf "directory: $template_url"
-      else
-        pf " invalid directory path "
-        get_path
-      fi
+    # i don't need to check it here
+      # pf " directory = $template_url"
+      # pf " directory type = $(file --mime-type -b  "$template_url")\n"
+      # if [[ $(file --mime-type -b  "$template_url") = *"/directory"* ]]
+      # then
+      #   pf "its a directory "
+      #   pf "directory: $template_url"
+      # else
+      #   pf " invalid directory path "
+      #   get_path
+      # fi
 
   #if its not valid rerun
   #get_path

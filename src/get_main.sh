@@ -7,11 +7,11 @@ function get_main()
   local mode=${2:-default}
   pf "mode = $mode"
   local user_input=${3:-none}
-  # find the dir we want to manipulate in the output dir
+  # find the dir we want to manipulate in the $temp_dir dir
   # may be multiple files
 
     # everyting can do this
-    # get the new directory from output folder
+    # get the new directory from $temp_dir folder
     local counter=0
     local file_count=""
     local current_file=""
@@ -21,6 +21,16 @@ function get_main()
     local limit=""
     local re='^[0-9]+$'
     local finished="false"
+
+    # make sure the directory isn't empty at this point
+    console.log "get_main temp dir = $temp_dir"
+
+    if [ -z "$(ls -A $temp_dir)" ];
+    then
+       pf "your $temp_dir directory is still empty be sure to follow the instructions for \n
+       continuing with a file that is already in place." 2 2
+       exit 1
+    fi
 
     while read -r file;
     do
@@ -34,13 +44,13 @@ function get_main()
         # concat a list just in case
         file_list="$file_list$file_count) $file_base\n\n"
 
-        pf "user input = $user_input"
-        pf "counter = $counter"
+        console.log "user input = $user_input"
+        console.log "counter = $counter"
 
         if [ $mode = "input" ] && [[ $user_input =~ $re ]]  && [ $file_count -eq $user_input ]
         then
           g_main="$file"
-          pf "return path = \n$g_main"
+          console.log "return path = \n$g_main"
           finished="true"
         fi
         ((counter++))
@@ -50,12 +60,12 @@ function get_main()
         ;;
       esac
 
-    done <<< $( find "output" -maxdepth 1 -type d )
+    done <<< $( find "$temp_dir" -maxdepth 1 -type d )
 
     # set the limit for later
     limit=$counter
-    pf "limit = $limit"
-    pf "g_main = $g_main"
+    console.log "limit = $limit"
+    console.log "g_main = $g_main"
 
     if [ $counter -eq 1 ] && [ -e $current_file ]
     then
@@ -68,11 +78,17 @@ function get_main()
       # pf "Enter the file number next to the file that you want to use." 1 0
       # read -p "(Enter the file number) : " my_file_nbr
       my_file_nbr="$(get_input "Enter the file number next to the file that you want to use." $limit )"
-      pf "my_file_nbr = $my_file_nbr"
+      pf "you selected file number: $my_file_nbr"
 
       get_main temp_var "input" "$my_file_nbr"
-      pf "temp_var = $temp_var"
+      console.log "temp_var = $temp_var"
       g_main="$temp_var"
+    elif [ $counter -eq 0 ]
+    then
+      pf "no joomla files were found in the $temp_dir folder.
+      \nEither copy a file into the $temp_dir folder or
+      \npaste the url to a joomla style directory (com|mod|plg|pkg)" 2 2
+      exit 1
     fi
 
     # set the results to the return var

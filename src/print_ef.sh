@@ -32,6 +32,12 @@ function get_line_breaks()
 function console.log()
 {
   # creates a print message system - like console.log
-  print_str="$1"
-  printf "\n$print_str\n\n"
+  case $user_mode in
+    "dev" | "development")
+      console_str="$1"
+      console_param1=${2:-1}
+      console_param2=${3:-2}
+      pf "$console_str" $console_param1 $console_param2
+    ;;
+  esac
 }

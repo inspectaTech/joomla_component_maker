@@ -35,6 +35,13 @@
   template_location=""
   template_url=""
 
+  temporary_directory="output"
+  temp_dir="$temporary_directory"
+
+  # pf "temp_dir = $temp_dir"
+
+  user_mode="dev"
+
   #/********** COMPONENT VARIABLES **********/
   component_name=""
   cn=""
@@ -60,13 +67,14 @@
 
   #/********** execution section ************/
    getMode uw_mode
-   printf "\n selected option is  $work_mode \n\n"
-   case $uw_mode in
-    "template" | "both"  )
+   pf "\n selected option is  $work_mode \n\n"
+   # case $uw_mode in
+   #  "template" | "both"  )
+    # it needs to know what to zip so it still has to run some other things
       create_template
-     ;;
-     "zip" )
-      zip_files
-     ;;
-   esac
+   #   ;;
+   #   "zip" )
+   #    zip_files
+   #   ;;
+   # esac
    # i need to be able to jump directly to the zip

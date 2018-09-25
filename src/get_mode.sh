@@ -12,9 +12,10 @@ function getMode () {
 
   mode_letter=${mode_letter,,}
 
-  pf "mode_letter = $mode_letter"
+  console.log "mode_letter = $mode_letter"
 
   ltr_z='z'
+
   if [ $mode_letter == "t" ] || [ $mode_letter == "z" ] || [ $mode_letter == "b" ]
   then
       case $mode_letter in
