@@ -1,0 +1,18 @@
+{
+  "name": "plg_system_richdata_v1.0.0",
+  "version": "1.0.0",
+  "description": "preps rich data for joomla pages",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --mode development ./src/app.js --output ./dist/bundle.js",
+    "build": "webpack --mode production ./src/app.js --output ./dist/bundle.js",
+    "diff": "diff -u file1 file2 | sed -n '1,2d;/^[-+]/p'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1"
+  }
+}

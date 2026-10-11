@@ -1,0 +1,9 @@
+#!/bin/bash
+cp dist/bundle.js /c/xampp/apps/joomla/htdocs/plugins/system/richdata/dist/bundle.js
+
+cp src/app.js /c/xampp/apps/joomla/htdocs/plugins/system/richdata/src/app.js
+
+cp src/lib/test_es2015.js /c/xampp/apps/joomla/htdocs/plugins/system/richdata/src/lib/test_es2015.js
+cp src/lib/test_common.js /c/xampp/apps/joomla/htdocs/plugins/system/richdata/src/lib/test_common.js
+
+printf "\ncopying files... \n\n"

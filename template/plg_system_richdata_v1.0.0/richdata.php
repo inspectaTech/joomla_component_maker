@@ -1,7 +1,7 @@
 <?php
 /**
  * @package     Joomla.Plugin
- * @subpackage  System.psmod
+ * @subpackage  System.richdata
  * @since 1.0
  * @copyright   Copyright (C) 2005 - 2018 Open Source Matters, Inc. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE.txt
@@ -10,12 +10,12 @@
 defined('_JEXEC') or die;
 
 /**
- * Joomla! psmod Plugin.
+ * Joomla! richdata Plugin.
  *
  * @since  1.6
  * @deprecate  4.0  Obsolete
  */
-class PlgSystemPsmod extends JPlugin
+class PlgSystemRichdata extends JPlugin
 {
 	/**
 	 * After initialise.
@@ -92,7 +92,6 @@ class PlgSystemPsmod extends JPlugin
 		// getServiceWorker();
 		// ');
 
-
 	}
 
 	/**
@@ -110,29 +109,25 @@ class PlgSystemPsmod extends JPlugin
 		// Do something onAfterRender
 
 		// show an alert
-		$fileLink = JFactory::getDocument();
+		$scriptLink = JFactory::getDocument();
 		// $fileLink->addScriptDeclaration('console.log("onBeforeCompileHead started"); alert("onBeforeCompileHead started")');
 
 		// new path
-		$fireManifest = JUri::base() . "plugins/system/psmod/firebase/manifest.json";
-		$fileLink->addHeadLink($fireManifest,'manifest','rel');
+		// $fireManifest = JUri::base() . "plugins/system/richdata/firebase/manifest.json";
+		// $fileLink->addHeadLink($fireManifest,'manifest','rel');
 
-		$firebase = "https://www.gstatic.com/firebasejs/3.6.0/firebase.js";
-		$fileLink->addScript($firebase);
-
-		$firebase_main = JUri::base() . "plugins/system/psmod/firebase/fire.js";
-		$fileLink->addScript($firebase_main);
+		$bundle = JUri::base() . "plugins/system/richdata/dist/bundle.js";
+		$scriptLink->addScript($bundle);
 
 		// this is the last thing that runs since i can't get onAfterRender running
-		$fileLink->addScriptDeclaration('
-		// console.log("starting service worker");
-		// alert("starting service worker");
-		// console.log("get service worker = ",getServiceWorker);
-		// fire.js depends on ROOT_URL
+		$scriptLink->addScriptDeclaration('
+		console.log("starting richdata plugin");
+		// alert("starting richdata plugin");
+
 		window[\'ROOT_URL\'] =  "' . JUri::root() . '";
 		// console.log("root = ",ROOT_URL);
 		// start the service worker
-		getServiceWorker();
+
 		');
 	}
 

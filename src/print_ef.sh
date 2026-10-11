@@ -4,6 +4,7 @@ function pf()
   # creates a print message system - like console.log
   print_str="$1"
 
+  #${2:-1} - this is for argument 2 with a default value ':-' of 1
   pfx_range=${2:-1}
   get_line_breaks pfx_lb pfx_range
   sfx_range=${3:-2}

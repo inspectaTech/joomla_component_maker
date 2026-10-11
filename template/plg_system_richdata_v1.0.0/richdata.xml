@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.0" type="plugin" group="system" method="upgrade">
+	<name>Rich Preview Plugin</name>
+	<author>inspectaTech</author>
+	<creationDate>09-2018</creationDate>
+	<copyright>(c)  sunzao tech llc. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>inspectaTech@sunzao.us</authorEmail>
+	<authorUrl>inspectaTech</authorUrl>
+	<version>1.0.0</version>
+	<description>PLG_RICHDATA_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="richdata">richdata.php</filename>
+		<filename>index.html</filename>
+		<folder>dist</folder>
+		<folder>language</folder>
+		<folder>src</folder>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_system_richdata.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_system_richdata.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field
+					name="header"
+					type="text"
+					label="PLG_RICHDATA_LABEL"
+					description="PLG_RICHDATA_DESCRIPTION"
+					default=""
+					size="37"
+				/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>

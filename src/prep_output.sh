@@ -27,7 +27,7 @@ function prep_output()
       # copy the template directory to the new folder
       # cp -r "../"$template_url .
       cp -r $template_url "$temp_dir"
-      pf "making copies..."
+      pf "making copies...\n(copying files to output dir)"
 
     ;;
   esac

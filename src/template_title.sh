@@ -67,7 +67,7 @@ function template_title (){
     # update xml authors name
     replace_xml $xml_file_path "name" "$official_title"
 
-    pf " what is the name of the template you will be using with this $display_label?" 1 0
+    pf " what is the name of the joomla template (i.e. prostar) you will be using with this $display_label?" 1 0
     read -p " (template name): " template_name
 
     if [ $template_type = "component" ] || [ $template_type = "both" ]

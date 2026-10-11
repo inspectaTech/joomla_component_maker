@@ -7,7 +7,11 @@ function get_path () {
 
   #run create_template
   pf "Enter the path of the target directory? (use: dirname or /directory/dirname) \n
-  (Enter a file path or press c to continue in place* or type help) " 1 1
+  options: \n
+  Enter a file path (*pwd file paths only), \n
+  press c to continue with a file already in the $temp_dir directory*,\n
+  press enter to construct a file from our preset templates,\n
+  or type help) " 1 1
   read -p ": " template_url
 
   #if one isn't given use the default template
@@ -40,34 +44,42 @@ function get_path () {
       # if one file exists confirm its use - file detected y, n or continue
 
     ;;
+
     "help" | "--help" | "h" | "-h" )
     # add help text here
+    # $temp_dir replaces 'as the template creator file'?
 
-          pf "hint 1:\n
-          the easiest remedy is to put the template you want
-           to work with in the same directory as the template creator file
-           then you would only need to add the directory name to the input
+          pf "option 1:\n
+          the easiest remedy is to paste the template you want
+           to work with in the $temp_dir directory then you would only need
+           to add the directory name to the input
           ex: my_directory \n
           \n\n
-          hint 2:\n
-          the next help would be to navigate into the target template directory
+          option 1:\n
+          or navigate into the target template directory
            using the 'cd' command and typing the 'pwd' command to get
            the current working directory then return to the template maker
            directory & using your mouse precision highlight the path
            for example: '/c/Users/d3pot/version-control/bash_scripting/bash_joomla'
            and paste it using the mouse right-click & paste menu option.
-           \n\n
+           \n\n1
           hint 3:\n
            to continue in place paste the folder you would like to work with inside
            of the $temp_dir folder or if there isn't an $temp_dir folder start the process by
            choosing c for continue and the script will create an $temp_dir folder for you
-           to paste your files into. -( or just create your own in the j.c.m root folder.)
+           to paste your files into. - (or just create your own 'output' directory
+           in the j.c.m root folder)
+           \n\n
+           hint 4:\n
+            Just press enter if you want to construct a component/module or package
+            from our samples.
            "
 
       exit 1
     ;;
     * )
-    pf " this is not a valid directory, it should be a pkg, com, or mod directory "
+    pf " this is not a valid directory, it should be a pkg, com, or mod directory. \n
+    (note plg may need renaming plg_[type]_[filename]) "
     get_path
     ;;
   esac
